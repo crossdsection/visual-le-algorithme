@@ -94,5 +94,11 @@ describe('sort', () => {
     const result = sort.insertionSort(passedArr)
     expect(result).arrayToBe( returnedArr );
   });
+  it('sort positive number array - Merge', () => {
+    let passedArr = [34,2,12,3,4,6,16,10,1,28,49,5,7,90,19];
+    let returnedArr = [ 1, 2, 3, 4, 5, 6, 7, 10, 12, 16, 19, 28, 34, 49, 90 ];
+    const result = sort.mergeSort(passedArr)
+    expect(result).arrayToBe( returnedArr );
+  });
 })
 

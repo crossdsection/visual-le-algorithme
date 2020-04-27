@@ -1,0 +1,11 @@
+body {
+	background: #eee;
+}
+
+#playArea {
+	margin : 10px;
+}
+
+#lengthOfArray, #rangeOfNumber {
+	display: inline;
+}
