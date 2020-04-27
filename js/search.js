@@ -1,10 +1,25 @@
 const linearSearch = function ( array, value ){
-	for( let i = 0; i < array.length; i++ ){
-		if( array[i] == value ){
-			return i;
+	return new Promise(async (resolve) => {
+		let svg = document.getElementById("playArea");		
+		var childNo = svg.getElementsByClassName("rectanlgeNumbers");
+		for( var j = 0; j < childNo.length; j++ ){
+			var number = parseInt( childNo[j].getAttribute("data-var") ); 
+			childNo[j].setAttribute("fill", READ_COLOUR);
+			await new Promise((resolve) => {
+		        setTimeout(() => {
+		          resolve();
+		        }, ANIMATION_SPEED);
+		    });
+		    
+			if( number == value ){
+				childNo[j].setAttribute("fill", MATCH_COLOUR);
+				resolve(i);
+			} else {
+				childNo[j].setAttribute("fill", INITIAL_COLOUR);
+			}
 		}
-	}
-	return false;
+		resolve(false);
+	});
 }
 
 //Only on sorted array
@@ -24,4 +39,4 @@ const binarySearch = function ( array, value ){
 	return false;
 }
 
-module.exports = {linearSearch, binarySearch};
+// module.exports = {linearSearch, binarySearch};

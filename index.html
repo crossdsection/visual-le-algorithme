@@ -5,9 +5,10 @@
 <title>Algo e visualiser</title>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<script src="https://code.jquery.com/jquery-3.5.0.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
-<script src="js/index.js"></script>
+<script src="js/sort.js"></script>
+<script src="js/search.js"></script>
 <link rel="stylesheet" type="text/css" href="https://unpkg.com/papercss@1.6.1/dist/paper.min.css">
+<script src="js/index.js"></script>
 <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
@@ -17,7 +18,15 @@
 			<input type="number" id="rangeOfNumber" placeholder="Range, Default: 100" min="0">
 			<button class="button-success">Create Array</button>
 			<button class="button-success" onclick="generateRandomNumbers()">Randomize Array</button>
-			<button class="button-success">Linear Search</button>
+			<button class="button-success" onclick="linearSearchProcess()">Linear Search</button>
+			<button class="button-success" onclick="bubbleSortProcess()">Bubble Sort</button>
+			<button class="button-success" onclick="selectionSortProcess()">Selection Sort</button>
+			<button class="button-success" onclick="insertionSortProcess()">Insertion Sort</button>
+		</div>
+	</div>
+	<div class="row">
+		<div id="hiddenDiv" class="col-12 col">
+			
 		</div>
 	</div>
 	<div id="svgDiv" class="row">
@@ -26,5 +35,8 @@
 		</div>
 	</div>
 </body>
+<script type="text/javascript">
+	init();
+</script>
 </html>
 
