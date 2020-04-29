@@ -15,12 +15,25 @@ const getRandomNumbers = function( arr, range ){
 	return newVariable;
 }
 
+const showError = function( errorText ){
+	document.getElementById("errorText").innerHTML = errorText;
+	document.getElementById("errorDiv").classList.remove("hideClass");
+	document.getElementById("errorDiv").classList.add("showClass");
+	setTimeout(function(){
+		document.getElementById("errorDiv").classList.remove("showClass");
+		document.getElementById("errorDiv").classList.add("hideClass");
+	},1000)
+	document.getElementById("manualEntry" + i).focus();
+}
 const generateRandomNumbers = function( sortedArray ){
 	document.getElementById("hiddenDiv").style.display = "none";
 
 	let arrLen = (document.getElementById("lengthOfArray").value != "" ) ? document.getElementById("lengthOfArray").value : 10;
 	let range = (document.getElementById("rangeOfNumber").value != "" ) ? document.getElementById("rangeOfNumber").value : 100;
 
+	if( range < arrLen ){
+		showError("Range Cannot be less then length of data.");
+	}
 	let max = 0;
 	if ( sortedArray == null ){
 		finalArray = [];
@@ -72,7 +85,7 @@ const generateRandomNumbers = function( sortedArray ){
 		text.classList.add("textNumbers");
 		text.setAttribute("style", 'font-size:' + fontSize + 'pt;');
 		text.setAttribute("x", posX);
-		text.setAttribute("y", barY);
+		text.setAttribute("y", barY + barHeight);
 		text.textContent = newVariable;
 
 		group.append( rectangle );
@@ -100,13 +113,7 @@ const createManualArray = function(){
 				}
 				obj[ number ]++;
 				if( obj[ number ] > 1 ){
-					document.getElementById("errorText").innerHTML = "We do not support Duplicate Numbers currently";
-					document.getElementById("errorDiv").classList.remove("hideClass");
-					document.getElementById("errorDiv").classList.add("showClass");
-					setTimeout(function(){
-						document.getElementById("errorDiv").classList.remove("showClass");
-						document.getElementById("errorDiv").classList.add("hideClass");
-					},1000)
+					showError("We do not support Duplicate Numbers currently");
 					return false;
 				}
 			}
@@ -140,14 +147,7 @@ const createManualArray = function(){
 			if( !isNaN( document.getElementById("manualEntry" + i).value ) && document.getElementById("manualEntry" + i).value != "" ){
 				array.push( parseInt( document.getElementById("manualEntry" + i).value ) );
 			} else {
-				document.getElementById("errorText").innerHTML = "Please enter valid numbers";
-				document.getElementById("errorDiv").classList.remove("hideClass");
-				document.getElementById("errorDiv").classList.add("showClass");
-				setTimeout(function(){
-					document.getElementById("errorDiv").classList.remove("showClass");
-					document.getElementById("errorDiv").classList.add("hideClass");
-				},1000)
-				document.getElementById("manualEntry" + i).focus();
+				showError("Please enter valid numbers");
 				return false;
 			}	
 		} 
