@@ -46,12 +46,12 @@ const generateRandomNumbers = function( sortedArray ){
 	let availableHeight = window.screen.height - document.getElementById("mainDiv").offsetHeight - 100;
 	var svgHeight = ( max > availableHeight ) ? ((max)/range) * availableHeight + 100 : availableHeight;
 
-	svg.setAttribute("height", svgHeight + "px");
+	svg.setAttribute("height", svgHeight + 20 + "px");
 
 	let posX = 0;
 	for( var i = 0; i < arrLen; i++ ){
 		let newVariable = finalArray[i];
-		let barHeight = (newVariable/range) * svgHeight - 20;
+		let barHeight = (newVariable/range) * svgHeight;
 		let barY = svgHeight - barHeight;
 
 		let group = document.createElementNS(svgns, "g");
