@@ -13,7 +13,7 @@ const linearSearch = function ( array, value ){
 		    
 			if( number == value ){
 				childNo[j].setAttribute("fill", MATCH_COLOUR);
-				resolve(i);
+				resolve(j);
 			} else {
 				childNo[j].setAttribute("fill", INITIAL_COLOUR);
 			}
