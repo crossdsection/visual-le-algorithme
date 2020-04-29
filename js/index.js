@@ -17,7 +17,7 @@ const getRandomNumbers = function( arr, range ){
 
 const generateRandomNumbers = function( sortedArray ){
 	document.getElementById("hiddenDiv").style.display = "none";
-	
+
 	let arrLen = (document.getElementById("lengthOfArray").value != "" ) ? document.getElementById("lengthOfArray").value : 10;
 	let range = (document.getElementById("rangeOfNumber").value != "" ) ? document.getElementById("rangeOfNumber").value : 100;
 
@@ -43,14 +43,15 @@ const generateRandomNumbers = function( sortedArray ){
 	let totalWidth = bBox.width;
 	let barWidth = (totalWidth / arrLen)/2;
 
-	let availableHeight = window.screen.height - document.getElementById("mainDiv").offsetHeight - 200;
-	var svgHeight = ( max > availableHeight ) ? ((max)/range) * availableHeight + 50 : availableHeight;
+	let availableHeight = window.screen.height - document.getElementById("mainDiv").offsetHeight - 100;
+	var svgHeight = ( max > availableHeight ) ? ((max)/range) * availableHeight + 100 : availableHeight;
+
 	svg.setAttribute("height", svgHeight + "px");
 
 	let posX = 0;
 	for( var i = 0; i < arrLen; i++ ){
 		let newVariable = finalArray[i];
-		let barHeight = (newVariable/range) * availableHeight;
+		let barHeight = (newVariable/range) * svgHeight - 20;
 		let barY = svgHeight - barHeight;
 
 		let group = document.createElementNS(svgns, "g");
