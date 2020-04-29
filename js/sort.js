@@ -29,12 +29,13 @@ const bubbleSort = function( array ){
 
 			firstRectangle.setAttribute("fill", READ_COLOUR);
 			secondRectangle.setAttribute("fill", READ_COLOUR);
+		
 			await new Promise((resolve) => {
 		        setTimeout(() => {
 		          resolve();
 		        }, ANIMATION_SPEED);
 		    });
-
+	
 			if( arraySwap.indexOf( i ) != -1 ){
 					firstRectangle.setAttribute("fill", MATCH_COLOUR);
 					secondRectangle.setAttribute("fill", MATCH_COLOUR);
@@ -46,6 +47,12 @@ const bubbleSort = function( array ){
 					secondRectangle.setAttribute("x", tmpX);		
 					secondText.setAttribute("x", secondRectangle.getAttribute("x"));
 			}
+
+			await new Promise((resolve) => {
+		        setTimeout(() => {
+		          resolve();
+		        }, ANIMATION_SPEED);
+		    });
 
 			firstRectangle.setAttribute("fill", INITIAL_COLOUR);
 			secondRectangle.setAttribute("fill", INITIAL_COLOUR);
@@ -105,6 +112,12 @@ const selectionSort = function( array ){
 					secondRectangle.setAttribute("x", tmpX);		
 					secondText.setAttribute("x", secondRectangle.getAttribute("x"));
 			}
+
+			await new Promise((resolve) => {
+		        setTimeout(() => {
+		          resolve();
+		        }, ANIMATION_SPEED);
+		    });
 
 			firstRectangle.setAttribute("fill", INITIAL_COLOUR);
 			secondRectangle.setAttribute("fill", INITIAL_COLOUR);

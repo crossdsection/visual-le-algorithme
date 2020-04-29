@@ -24,19 +24,44 @@ const linearSearch = function ( array, value ){
 
 //Only on sorted array
 const binarySearch = function ( array, value ){
-	let highEnd = array.length - 1;
-	let lowerEnd = 0;
-	while( lowerEnd <= highEnd ){
-		var middleEnd = Math.floor((highEnd + lowerEnd)/2);
-		if( array[ middleEnd ] == value ){
-			return middleEnd;
-		} else if( array[ middleEnd ] > value ){
-			highEnd = middleEnd - 1;
-		} else if( array[ middleEnd ] < value ){
-			lowerEnd = middleEnd + 1;
+	return new Promise(async (resolve) => {
+		let svg = document.getElementById("playArea");		
+		var childNo = svg.getElementsByClassName("rectanlgeNumbers");
+		console.log( childNo );
+		let found = false;
+		let highEnd = childNo.length - 1;
+		let lowerEnd = 0;
+		while( lowerEnd <= highEnd ){
+			var middleEnd = Math.floor((highEnd + lowerEnd)/2);
+
+			childNo[middleEnd].setAttribute("fill", READ_COLOUR);
+			var number = parseInt( childNo[middleEnd].getAttribute("data-var") ); 
+			console.log( number, middleEnd );
+			await new Promise((resolve) => {
+		        setTimeout(() => {
+		          resolve();
+		        }, ANIMATION_SPEED);
+		    });
+
+			if( number == value ){
+				childNo[middleEnd].setAttribute("fill", MATCH_COLOUR);
+				found = true;
+				break;
+			} else if( number > value ){
+				childNo[middleEnd].setAttribute("fill", INITIAL_COLOUR);
+				highEnd = middleEnd - 1;
+			} else if( number < value ){
+				childNo[middleEnd].setAttribute("fill", INITIAL_COLOUR);
+				lowerEnd = middleEnd + 1;
+			}
+			console.log( middleEnd, highEnd, lowerEnd );
 		}
-	}
-	return false;
+		if( found ){
+			resolve(middleEnd);
+		} else {
+			resolve(false);
+		}
+	});
 }
 
 // module.exports = {linearSearch, binarySearch};

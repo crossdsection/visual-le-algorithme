@@ -5,7 +5,7 @@ const INITIAL_COLOUR = "#00FFFF";
 const READ_COLOUR = "#D17460"; 
 const MATCH_COLOUR = "#6ED160"; 
 
-let ANIMATION_SPEED = 500;
+let ANIMATION_SPEED = 200;
 
 const getRandomNumbers = function( arr, range ){	
 	let newVariable = -1;
@@ -15,11 +15,25 @@ const getRandomNumbers = function( arr, range ){
 	return newVariable;
 }
 
-const generateRandomNumbers = function(){
+const generateRandomNumbers = function( sortedArray ){
 	let arrLen = (document.getElementById("lengthOfArray").value != "" ) ? document.getElementById("lengthOfArray").value : 10;
 	let range = (document.getElementById("rangeOfNumber").value != "" ) ? document.getElementById("rangeOfNumber").value : 100;
 
-	finalArray = [];
+	let max = 0;
+	if ( sortedArray == null ){
+		finalArray = [];
+		for( var i = 0; i < arrLen; i++ ){
+			let newVariable = getRandomNumbers( finalArray, range );
+			if( max < newVariable ){
+				max = newVariable;
+			}
+			finalArray.push( newVariable );
+		}
+	} else {
+		finalArray = sortedArray;
+		max = finalArray[ finalArray.length - 1 ];
+	}
+
 	document.getElementById("playArea").innerHTML = "";
 
 	let svg = document.getElementById('playArea'); 
@@ -28,18 +42,7 @@ const generateRandomNumbers = function(){
 	let barWidth = (totalWidth / arrLen)/2;
 
 	let availableHeight = window.screen.height - document.getElementById("mainDiv").offsetHeight - 200;
-
-	let max = 0;
-	for( var i = 0; i < arrLen; i++ ){
-		let newVariable = getRandomNumbers( finalArray, range );
-		if( max < newVariable ){
-			max = newVariable;
-		}
-
-		finalArray.push( newVariable );
-	}
 	
-	console.log( finalArray );
 	var svgHeight = ((max + 10)/range) * availableHeight + 20;
 	svg.setAttribute("height", svgHeight + "px");
 
@@ -77,10 +80,15 @@ const generateRandomNumbers = function(){
 	}
 }
 
-const linearSearchProcess = function(){
+const searchDiv = function(searchType){
 	document.getElementById("hiddenDiv").innerHTML = "";
 
 	document.getElementById("hiddenDiv").style.display = "none";
+
+	if( searchType == 'binary' ){
+		finalArray = mergeSort( finalArray );
+		generateRandomNumbers( finalArray );
+	}
 
 	var inputForSearch = document.createElement("input");
 	inputForSearch.setAttribute("type", "number");
@@ -98,7 +106,12 @@ const linearSearchProcess = function(){
 	buttonForSearch.innerHTML = "Submit";
 	buttonForSearch.classList.add("button-class");
 	buttonForSearch.addEventListener('click',function(e) {
-	    value = linearSearch( finalArray, inputForSearch.value );
+		if( searchType == "linear" ){
+			value = linearSearch( finalArray, inputForSearch.value );
+		}
+		if( searchType == "binary" ){
+			value = binarySearch( finalArray, inputForSearch.value );
+		}
 	});
 
 	document.getElementById("hiddenDiv").appendChild( inputForSearch );
