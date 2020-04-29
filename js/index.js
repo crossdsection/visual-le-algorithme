@@ -42,8 +42,7 @@ const generateRandomNumbers = function( sortedArray ){
 	let barWidth = (totalWidth / arrLen)/2;
 
 	let availableHeight = window.screen.height - document.getElementById("mainDiv").offsetHeight - 200;
-	
-	var svgHeight = ((max + 10)/range) * availableHeight + 20;
+	var svgHeight = ( max > availableHeight ) ? ((max)/range) * availableHeight + 50 : availableHeight;
 	svg.setAttribute("height", svgHeight + "px");
 
 	let posX = 0;
@@ -80,11 +79,88 @@ const generateRandomNumbers = function( sortedArray ){
 	}
 }
 
-const searchDiv = function(searchType){
+const createManualArray = function(){
+	let arrLen = (document.getElementById("lengthOfArray").value != "" ) ? document.getElementById("lengthOfArray").value : 10;
 	document.getElementById("hiddenDiv").innerHTML = "";
-
 	document.getElementById("hiddenDiv").style.display = "none";
 
+	var manualDiv = document.createElement("div");
+
+	//temp
+	var validateDuplicacy = function( value ){
+		var obj = {};
+		for( var i = 0; i < arrLen; i++ ){
+			if( !isNaN( document.getElementById("manualEntry" + i).value ) && document.getElementById("manualEntry" + i).value != "" ){
+				var number = document.getElementById("manualEntry" + i).value;
+				if( obj[ number ] == null ){
+					obj[ number ] = 0;
+				}
+				obj[ number ]++;
+				if( obj[ number ] > 1 ){
+					document.getElementById("errorText").innerHTML = "We do not support Duplicate Numbers currently";
+					document.getElementById("errorDiv").classList.remove("hideClass");
+					document.getElementById("errorDiv").classList.add("showClass");
+					setTimeout(function(){
+						document.getElementById("errorDiv").classList.remove("showClass");
+						document.getElementById("errorDiv").classList.add("hideClass");
+					},1000)
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+
+	for( var i = 0; i < arrLen; i++ ){
+		var manualInput = document.createElement("input");
+		manualInput.setAttribute("type", "number");
+		manualInput.setAttribute("id", "manualEntry" + i );
+		manualInput.setAttribute("placeholder", "Enter Number");
+		manualInput.setAttribute("min", 0);
+		manualInput.style.width = "100px";
+		manualInput.style.display = "inline";
+		manualInput.addEventListener('blur',function(e) {
+			if( !validateDuplicacy() ){
+				this.value = "";
+				this.focus();
+			}
+		});
+		manualDiv.appendChild( manualInput );
+	}
+
+	var buttonManual = document.createElement("button");
+	buttonManual.innerHTML = "Submit";
+	buttonManual.classList.add("button-class");
+	buttonManual.addEventListener('click',function(e) {
+		array = [];
+		for( var i = 0; i < arrLen; i++ ){
+			if( !isNaN( document.getElementById("manualEntry" + i).value ) && document.getElementById("manualEntry" + i).value != "" ){
+				array.push( parseInt( document.getElementById("manualEntry" + i).value ) );
+			} else {
+				document.getElementById("errorText").innerHTML = "Please enter valid numbers";
+				document.getElementById("errorDiv").classList.remove("hideClass");
+				document.getElementById("errorDiv").classList.add("showClass");
+				setTimeout(function(){
+					document.getElementById("errorDiv").classList.remove("showClass");
+					document.getElementById("errorDiv").classList.add("hideClass");
+				},1000)
+				document.getElementById("manualEntry" + i).focus();
+				return false;
+			}	
+		} 
+		generateRandomNumbers( array );
+		document.getElementById("hiddenDiv").style.display = "none";
+	});
+	manualDiv.appendChild( buttonManual );
+
+	document.getElementById("hiddenDiv").appendChild( manualDiv);
+
+	document.getElementById("hiddenDiv").style.display = "block";
+}
+
+const searchDiv = function(searchType){
+	document.getElementById("hiddenDiv").innerHTML = "";
+	document.getElementById("hiddenDiv").style.display = "none";
 	if( searchType == 'binary' ){
 		finalArray = mergeSort( finalArray );
 		generateRandomNumbers( finalArray );
@@ -108,9 +184,11 @@ const searchDiv = function(searchType){
 	buttonForSearch.addEventListener('click',function(e) {
 		if( searchType == "linear" ){
 			value = linearSearch( finalArray, inputForSearch.value );
+			document.getElementById("hiddenDiv").style.display = "none";
 		}
 		if( searchType == "binary" ){
 			value = binarySearch( finalArray, inputForSearch.value );
+			document.getElementById("hiddenDiv").style.display = "none";
 		}
 	});
 

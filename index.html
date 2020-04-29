@@ -16,7 +16,7 @@
 		<div class="col-12 col">
 			<input type="number" id="lengthOfArray" placeholder="Length, Default: 10" min="0">
 			<input type="number" id="rangeOfNumber" placeholder="Range, Default: 100" min="0">
-			<button class="button-success">Create Array</button>
+			<button class="button-success" onclick="createManualArray()">Create Array</button>
 			<button class="button-success" onclick="generateRandomNumbers()">Randomize Array</button>
 			<button class="button-success" onclick="searchDiv('linear')">Linear Search</button>
 			<button class="button-success" onclick="searchDiv('binary')">Binary Search</button>
@@ -24,6 +24,9 @@
 			<button class="button-success" onclick="selectionSortProcess()">Selection Sort</button>
 			<button class="button-success" onclick="insertionSortProcess()">Insertion Sort</button>
 		</div>
+	</div>
+	<div id="errorDiv" class="row flex-spaces hideClass">
+		<div id="errorText" class="alert alert-danger"></div>
 	</div>
 	<div class="row">
 		<div id="hiddenDiv" class="col-12 col">

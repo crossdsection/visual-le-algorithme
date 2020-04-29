@@ -9,3 +9,11 @@ body {
 #lengthOfArray, #rangeOfNumber {
 	display: inline;
 }
+
+.hideClass {
+	display: none;
+}
+
+.showClass {
+	display: block;
+}
