@@ -16,6 +16,8 @@ const getRandomNumbers = function( arr, range ){
 }
 
 const generateRandomNumbers = function( sortedArray ){
+	document.getElementById("hiddenDiv").style.display = "none";
+	
 	let arrLen = (document.getElementById("lengthOfArray").value != "" ) ? document.getElementById("lengthOfArray").value : 10;
 	let range = (document.getElementById("rangeOfNumber").value != "" ) ? document.getElementById("rangeOfNumber").value : 100;
 
@@ -149,7 +151,6 @@ const createManualArray = function(){
 			}	
 		} 
 		generateRandomNumbers( array );
-		document.getElementById("hiddenDiv").style.display = "none";
 	});
 	manualDiv.appendChild( buttonManual );
 
