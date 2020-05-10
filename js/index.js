@@ -25,6 +25,7 @@ const showError = function( errorText ){
 	},1000)
 	document.getElementById("manualEntry" + i).focus();
 }
+
 const generateRandomNumbers = function( sortedArray ){
 	document.getElementById("hiddenDiv").style.display = "none";
 
@@ -196,6 +197,37 @@ const searchDiv = function(searchType){
 
 	document.getElementById("hiddenDiv").appendChild( inputForSearch );
 	document.getElementById("hiddenDiv").appendChild( buttonForSearch );
+
+	document.getElementById("hiddenDiv").style.display = "block";
+}
+
+const changeAnimationSpeed = function(){
+	document.getElementById("hiddenDiv").innerHTML = "";
+	document.getElementById("hiddenDiv").style.display = "none";
+
+	var inputAnimationSpeed = document.createElement("input");
+	inputAnimationSpeed.setAttribute("type", "number");
+	inputAnimationSpeed.setAttribute("id", "searchNumber");
+	inputAnimationSpeed.setAttribute("placeholder", "Enter Speed in MiliSecond");
+	inputAnimationSpeed.style.display = "inline";
+
+	inputAnimationSpeed.addEventListener('keypress',function(e) {
+	    if(e.which == 13) {
+	        ANIMATION_SPEED = inputAnimationSpeed.value;
+	        document.getElementById("hiddenDiv").style.display = "none";
+	    }
+	});
+
+	var buttonForSpeed = document.createElement("button");
+	buttonForSpeed.innerHTML = "Submit";
+	buttonForSpeed.classList.add("button-class");
+	buttonForSpeed.addEventListener('click',function(e) {
+		ANIMATION_SPEED = inputAnimationSpeed.value;
+		document.getElementById("hiddenDiv").style.display = "none";
+	});
+
+	document.getElementById("hiddenDiv").appendChild( inputAnimationSpeed );
+	document.getElementById("hiddenDiv").appendChild( buttonForSpeed );
 
 	document.getElementById("hiddenDiv").style.display = "block";
 }
