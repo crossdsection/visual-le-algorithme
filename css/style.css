@@ -17,3 +17,7 @@ body {
 .showClass {
 	display: block;
 }
+
+input {
+	margin-bottom: 0.5rem;
+}
