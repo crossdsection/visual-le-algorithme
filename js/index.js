@@ -23,7 +23,6 @@ const showError = function( errorText ){
 		document.getElementById("errorDiv").classList.remove("showClass");
 		document.getElementById("errorDiv").classList.add("hideClass");
 	},1000)
-	document.getElementById("manualEntry" + i).focus();
 }
 
 const generateRandomNumbers = function( sortedArray ){
@@ -115,6 +114,7 @@ const createManualArray = function(){
 				obj[ number ]++;
 				if( obj[ number ] > 1 ){
 					showError("We do not support Duplicate Numbers currently");
+					document.getElementById("manualEntry" + i).focus();
 					return false;
 				}
 			}

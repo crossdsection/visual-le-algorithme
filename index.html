@@ -14,8 +14,14 @@
 <body>
 	<div id="mainDiv" class="row">
 		<div class="col-12 col">
-			<input type="number" id="lengthOfArray" placeholder="Length, Default: 10" min="0">
-			<input type="number" id="rangeOfNumber" placeholder="Range, Default: 100" min="0">
+			<div>
+				<label for="lengthOfArray">Length, Default: 10</label>
+				<input type="number" id="lengthOfArray" min="0">
+			</div>
+			<div>
+				<label for="lengthOfArray">Range, Default: 100</label>
+				<input type="number" id="rangeOfNumber" min="0">
+			</div>
 			<button class="button-success" onclick="createManualArray()">Create Array</button>
 			<button class="button-success" onclick="generateRandomNumbers()">Randomize Array</button>
 			<button class="button-success" onclick="changeAnimationSpeed()">Change Animation Speed</button>
