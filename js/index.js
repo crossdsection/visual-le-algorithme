@@ -57,6 +57,8 @@ const generateRandomNumbers = function( sortedArray ){
 	let barWidth = (totalWidth / arrLen)/2;
 
 	let availableHeight = window.screen.height - document.getElementById("mainDiv").offsetHeight - 100;
+	availableHeight = (availableHeight < 10 ) ? window.screen.height : availableHeight;
+	
 	var svgHeight = ( max > availableHeight ) ? ((max)/range) * availableHeight + 100 : availableHeight;
 
 	svg.setAttribute("height", svgHeight + 20 + "px");
