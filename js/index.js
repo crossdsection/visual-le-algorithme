@@ -1,7 +1,7 @@
 const svgns = "http://www.w3.org/2000/svg";
 var finalArray = [];
 
-const INITIAL_COLOUR = "#00FFFF";
+const INITIAL_COLOUR = "#1F6FB2";
 const READ_COLOUR = "#D17460"; 
 const MATCH_COLOUR = "#6ED160"; 
 
